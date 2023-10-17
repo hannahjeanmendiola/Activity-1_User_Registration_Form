@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+           
+            font-family: Arial;
+            background-color: #FFFAFA;
+            text-align: center;
+        }
+
+        h1 {
+            color: #eea29a;
+        }
+
+        form {
+            background-color: black;
+            border-radius: 8px;
+            width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            margin-top: 10px;
+            color: white;
+    
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 90%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid white;
+            border-radius: 5px;
+            font-family: Arial;
+        }
+
+        input[type="button"] {
+            background-color: #F08080;
+            color: black;
+            font-family: Arial;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            
+        }
+
+        input[type="button"]:hover {
+            background-color: #F08080;
+        }
+
+    </style>
+    <title>User Registration Form</title>
+    <body>
+        <h1>USER REGISTRATION FORM</h1>
+        <form method="POST" action="registrationformprocess.php">
+            <label for="username">USER NAME</label>
+            <input type="text" id="username" name="username" required><br><br>
+
+            <label for="firstname">FIRST NAME</label>
+            <input type="text" id="firstname" name="firstname" required><br><br>
+    
+            <label for="lastname">LAST NAME</label>
+            <input type="text" id="lastname" name="lastname" required><br><br>
+
+            <label for="email">EMAIL</label>
+            <input type="email" id="email" name="email" required><br><br>
+    
+            <label for="password">PASSWORD</label>
+            <input type="password" id="password" name="password" required><br><br>
+    
+            <input type="button" value="REGISTERED" onclick="storeData()">
+        </form>
+    <script>
+     
+        function storeData() {
+            const username = document.getElementById('username').value;
+            const firstname = document.getElementById('firstname').value;
+            const lastname = document.getElementById('lastname').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            if (!email.match(emailPattern)) {
+                alert('Please Enter a Valid Email Address.');
+                return;
+            }
+
+            const userData = {
+                username: username,
+                firstname: firstname,
+                lastname: lastname,
+                email: email,
+                password: password
+            };
+
+            localStorage.setItem('userData', JSON.stringify(userData));
+            alert('Registration Successful! User data is Stored in Local Storage.');
+
+            document.getElementById('username').value = '';
+            document.getElementById('firstname').value = '';
+            document.getElementById('lastname').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('password').value = '';
+        }
+    </script>
+</head>
+</body>
+</html>
